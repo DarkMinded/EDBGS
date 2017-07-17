@@ -1,0 +1,82 @@
+﻿@model EDBGS.edsystem
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>edsystem</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EDDNId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EDDNId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.X)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.X)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Y)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Y)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Z)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Z)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Premit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Premit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Populated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Populated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.reserve.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.reserve.name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.EDSystemId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

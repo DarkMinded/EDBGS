@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0e48e974d6fa4af0b4fffacb29e8e03b" Name="EDBGSDiag" ZoomLevel="74">
+        <EntityTypeShape EntityType="edbgsModel.economy" Width="1.5" PointX="5.25" PointY="17.25" />
+        <EntityTypeShape EntityType="edbgsModel.edfaction" Width="1.5" PointX="5.25" PointY="7.375" />
+        <EntityTypeShape EntityType="edbgsModel.edfactionhist" Width="1.5" PointX="7.5" PointY="7.625" />
+        <EntityTypeShape EntityType="edbgsModel.edpendingstate" Width="1.5" PointX="12.75" PointY="8" />
+        <EntityTypeShape EntityType="edbgsModel.edstation" Width="1.5" PointX="10.5" PointY="7.625" />
+        <EntityTypeShape EntityType="edbgsModel.edsystem" Width="1.5" PointX="3" PointY="7.25" />
+        <EntityTypeShape EntityType="edbgsModel.edsystemhist" Width="1.5" PointX="7.5" PointY="2.125" />
+        <EntityTypeShape EntityType="edbgsModel.govtype" Width="1.5" PointX="3" PointY="12.375" />
+        <EntityTypeShape EntityType="edbgsModel.power" Width="1.5" PointX="5.25" PointY="14.75" />
+        <EntityTypeShape EntityType="edbgsModel.powerstate" Width="1.5" PointX="5.25" PointY="4.625" />
+        <EntityTypeShape EntityType="edbgsModel.reserve" Width="1.5" PointX="0.75" PointY="8.25" />
+        <EntityTypeShape EntityType="edbgsModel.security" Width="1.5" PointX="5.25" PointY="12.25" />
+        <EntityTypeShape EntityType="edbgsModel.state" Width="1.5" PointX="5.25" PointY="0.75" />
+        <EntityTypeShape EntityType="edbgsModel.superpower" Width="1.5" PointX="3" PointY="3.625" />
+        <AssociationConnector Association="edbgsModel.SYSTEMHIST_Economy_FK" />
+        <AssociationConnector Association="edbgsModel.allegiance_FK" />
+        <AssociationConnector Association="edbgsModel.faction_fk" />
+        <AssociationConnector Association="edbgsModel.FactionHist_Faction_FK" />
+        <AssociationConnector Association="edbgsModel.Government_FK" />
+        <AssociationConnector Association="edbgsModel.homesystem_FK" />
+        <AssociationConnector Association="edbgsModel.SYSTEMHIST_Faction_FK" />
+        <AssociationConnector Association="edbgsModel.FactionHist_State_FK" />
+        <AssociationConnector Association="edbgsModel.FactionHist_System_FK" />
+        <AssociationConnector Association="edbgsModel.PendingState_FactionHist" />
+        <AssociationConnector Association="edbgsModel.PendingState_State_FK" />
+        <AssociationConnector Association="edbgsModel.system_fk" />
+        <AssociationConnector Association="edbgsModel.System_Reserves_FK" />
+        <AssociationConnector Association="edbgsModel.SYSTEMHIST_System_FK" />
+        <AssociationConnector Association="edbgsModel.SYSTEMHIST_Power_FK" />
+        <AssociationConnector Association="edbgsModel.SYSTEMHIST_PowerState_FK" />
+        <AssociationConnector Association="edbgsModel.SYSTEMHIST_Security_FK" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

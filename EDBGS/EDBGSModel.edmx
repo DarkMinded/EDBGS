@@ -1,0 +1,1103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="edbgsModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="economy">
+          <Key>
+            <PropertyRef Name="economyid" />
+          </Key>
+          <Property Name="economyid" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="35" Nullable="false" />
+          <Property Name="game_id" Type="varchar" MaxLength="35" Nullable="false" />
+          <Property Name="EDDNId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="edfaction">
+          <Key>
+            <PropertyRef Name="edfactionId" />
+          </Key>
+          <Property Name="edfactionId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="HomeSystem" Type="bigint" Nullable="false" />
+          <Property Name="IsPlayerFaction" Type="bit" Nullable="false" />
+          <Property Name="govtype" Type="int" Nullable="false" />
+          <Property Name="allegiance" Type="int" Nullable="false" />
+          <Property Name="EDDNId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="edfactionhist">
+          <Key>
+            <PropertyRef Name="edfactionhistId" />
+          </Key>
+          <Property Name="edfactionhistId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="edfactionid" Type="bigint" />
+          <Property Name="edsystemid" Type="bigint" />
+          <Property Name="timestamp" Type="datetime" Precision="0" />
+          <Property Name="stateid" Type="int" />
+          <Property Name="influence" Type="float" />
+        </EntityType>
+        <EntityType Name="edpendingstates">
+          <Key>
+            <PropertyRef Name="edpendingstatesid" />
+          </Key>
+          <Property Name="edpendingstatesid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="edfactionhistid" Type="bigint" />
+          <Property Name="trend" Type="int" />
+          <Property Name="stateid" Type="int" />
+          <Property Name="EDDNId" Type="int" />
+        </EntityType>
+        <EntityType Name="edstation">
+          <Key>
+            <PropertyRef Name="edstationId" />
+          </Key>
+          <Property Name="edstationId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="45" />
+          <Property Name="ControlingFaction" Type="bigint" Nullable="false" />
+          <Property Name="SystemId" Type="bigint" Nullable="false" />
+          <Property Name="EconomyId" Type="int" Nullable="false" />
+          <Property Name="StationTypeId" Type="int" Nullable="false" />
+          <Property Name="Planetary" Type="bit" Nullable="false" />
+          <Property Name="EDDNId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="edsystem">
+          <Key>
+            <PropertyRef Name="EDSystemId" />
+          </Key>
+          <Property Name="EDSystemId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EDDNId" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="X" Type="float" Nullable="false" />
+          <Property Name="Y" Type="float" Nullable="false" />
+          <Property Name="Z" Type="float" Nullable="false" />
+          <Property Name="Premit" Type="bit" Nullable="false" />
+          <Property Name="Populated" Type="bit" Nullable="false" />
+          <Property Name="Reserves" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="edsystemhist">
+          <Key>
+            <PropertyRef Name="edsystemhistid" />
+          </Key>
+          <Property Name="edsystemhistid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="edsystemid" Type="bigint" Nullable="false" />
+          <Property Name="timestamp" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="controlingfactionid" Type="bigint" Nullable="false" />
+          <Property Name="economyid" Type="int" Nullable="false" />
+          <Property Name="powerid" Type="int" Nullable="false" />
+          <Property Name="powerstateid" Type="int" Nullable="false" />
+          <Property Name="securityid" Type="int" Nullable="false" />
+          <Property Name="EDDNId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="govtype">
+          <Key>
+            <PropertyRef Name="govtypeid" />
+          </Key>
+          <Property Name="govtypeid" Type="int" Nullable="false" />
+          <Property Name="type" Type="varchar" MaxLength="35" Nullable="false" />
+          <Property Name="description" Type="longtext" />
+          <Property Name="game_id" Type="varchar" MaxLength="35" Nullable="false" />
+          <Property Name="EDDNId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="power">
+          <Key>
+            <PropertyRef Name="powerid" />
+          </Key>
+          <Property Name="powerid" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="35" Nullable="false" />
+          <Property Name="game_id" Type="varchar" MaxLength="35" Nullable="false" />
+        </EntityType>
+        <EntityType Name="powerstate">
+          <Key>
+            <PropertyRef Name="powerstateid" />
+          </Key>
+          <Property Name="powerstateid" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="35" Nullable="false" />
+          <Property Name="game_id" Type="varchar" MaxLength="35" Nullable="false" />
+        </EntityType>
+        <EntityType Name="reserve">
+          <Key>
+            <PropertyRef Name="reserveid" />
+          </Key>
+          <Property Name="reserveid" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="35" Nullable="false" />
+          <Property Name="game_id" Type="varchar" MaxLength="35" Nullable="false" />
+        </EntityType>
+        <EntityType Name="security">
+          <Key>
+            <PropertyRef Name="securityid" />
+          </Key>
+          <Property Name="securityid" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="35" Nullable="false" />
+          <Property Name="game_id" Type="varchar" MaxLength="35" Nullable="false" />
+        </EntityType>
+        <EntityType Name="state">
+          <Key>
+            <PropertyRef Name="stateid" />
+          </Key>
+          <Property Name="stateid" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="35" Nullable="false" />
+          <Property Name="description" Type="longtext" Nullable="false" />
+          <Property Name="game_id" Type="varchar" MaxLength="35" Nullable="false" />
+          <Property Name="Faction" Type="bit" Nullable="false" />
+          <Property Name="System" Type="bit" Nullable="false" />
+          <Property Name="Power" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="superpower">
+          <Key>
+            <PropertyRef Name="superpowerid" />
+          </Key>
+          <Property Name="superpowerid" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="35" Nullable="false" />
+          <Property Name="description" Type="longtext" />
+          <Property Name="game_id" Type="varchar" MaxLength="35" Nullable="false" />
+        </EntityType>
+        <Association Name="allegiance_FK">
+          <End Role="superpower" Type="Self.superpower" Multiplicity="1" />
+          <End Role="edfaction" Type="Self.edfaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="superpower">
+              <PropertyRef Name="superpowerid" />
+            </Principal>
+            <Dependent Role="edfaction">
+              <PropertyRef Name="allegiance" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="faction_fk">
+          <End Role="edfaction" Type="Self.edfaction" Multiplicity="1" />
+          <End Role="edstation" Type="Self.edstation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="edfaction">
+              <PropertyRef Name="edfactionId" />
+            </Principal>
+            <Dependent Role="edstation">
+              <PropertyRef Name="ControlingFaction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FactionHist_Faction_FK">
+          <End Role="edfaction" Type="Self.edfaction" Multiplicity="0..1" />
+          <End Role="edfactionhist" Type="Self.edfactionhist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="edfaction">
+              <PropertyRef Name="edfactionId" />
+            </Principal>
+            <Dependent Role="edfactionhist">
+              <PropertyRef Name="edfactionid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FactionHist_State_FK">
+          <End Role="state" Type="Self.state" Multiplicity="0..1" />
+          <End Role="edfactionhist" Type="Self.edfactionhist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="state">
+              <PropertyRef Name="stateid" />
+            </Principal>
+            <Dependent Role="edfactionhist">
+              <PropertyRef Name="stateid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FactionHist_System_FK">
+          <End Role="edsystem" Type="Self.edsystem" Multiplicity="0..1" />
+          <End Role="edfactionhist" Type="Self.edfactionhist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="edsystem">
+              <PropertyRef Name="EDSystemId" />
+            </Principal>
+            <Dependent Role="edfactionhist">
+              <PropertyRef Name="edsystemid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Government_FK">
+          <End Role="govtype" Type="Self.govtype" Multiplicity="1" />
+          <End Role="edfaction" Type="Self.edfaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="govtype">
+              <PropertyRef Name="govtypeid" />
+            </Principal>
+            <Dependent Role="edfaction">
+              <PropertyRef Name="govtype" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="homesystem_FK">
+          <End Role="edsystem" Type="Self.edsystem" Multiplicity="1" />
+          <End Role="edfaction" Type="Self.edfaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="edsystem">
+              <PropertyRef Name="EDSystemId" />
+            </Principal>
+            <Dependent Role="edfaction">
+              <PropertyRef Name="HomeSystem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PendingState_FactionHist">
+          <End Role="edfactionhist" Type="Self.edfactionhist" Multiplicity="0..1" />
+          <End Role="edpendingstates" Type="Self.edpendingstates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="edfactionhist">
+              <PropertyRef Name="edfactionhistId" />
+            </Principal>
+            <Dependent Role="edpendingstates">
+              <PropertyRef Name="edfactionhistid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PendingState_State_FK">
+          <End Role="state" Type="Self.state" Multiplicity="0..1" />
+          <End Role="edpendingstates" Type="Self.edpendingstates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="state">
+              <PropertyRef Name="stateid" />
+            </Principal>
+            <Dependent Role="edpendingstates">
+              <PropertyRef Name="stateid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="system_fk">
+          <End Role="edsystem" Type="Self.edsystem" Multiplicity="1" />
+          <End Role="edstation" Type="Self.edstation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="edsystem">
+              <PropertyRef Name="EDSystemId" />
+            </Principal>
+            <Dependent Role="edstation">
+              <PropertyRef Name="SystemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="System_Reserves_FK">
+          <End Role="reserve" Type="Self.reserve" Multiplicity="1" />
+          <End Role="edsystem" Type="Self.edsystem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reserve">
+              <PropertyRef Name="reserveid" />
+            </Principal>
+            <Dependent Role="edsystem">
+              <PropertyRef Name="Reserves" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SYSTEMHIST_Economy_FK">
+          <End Role="economy" Type="Self.economy" Multiplicity="1" />
+          <End Role="edsystemhist" Type="Self.edsystemhist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="economy">
+              <PropertyRef Name="economyid" />
+            </Principal>
+            <Dependent Role="edsystemhist">
+              <PropertyRef Name="economyid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SYSTEMHIST_Faction_FK">
+          <End Role="edfaction" Type="Self.edfaction" Multiplicity="1" />
+          <End Role="edsystemhist" Type="Self.edsystemhist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="edfaction">
+              <PropertyRef Name="edfactionId" />
+            </Principal>
+            <Dependent Role="edsystemhist">
+              <PropertyRef Name="controlingfactionid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SYSTEMHIST_Power_FK">
+          <End Role="power" Type="Self.power" Multiplicity="1" />
+          <End Role="edsystemhist" Type="Self.edsystemhist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="power">
+              <PropertyRef Name="powerid" />
+            </Principal>
+            <Dependent Role="edsystemhist">
+              <PropertyRef Name="powerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SYSTEMHIST_PowerState_FK">
+          <End Role="powerstate" Type="Self.powerstate" Multiplicity="1" />
+          <End Role="edsystemhist" Type="Self.edsystemhist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="powerstate">
+              <PropertyRef Name="powerstateid" />
+            </Principal>
+            <Dependent Role="edsystemhist">
+              <PropertyRef Name="powerstateid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SYSTEMHIST_Security_FK">
+          <End Role="security" Type="Self.security" Multiplicity="1" />
+          <End Role="edsystemhist" Type="Self.edsystemhist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="security">
+              <PropertyRef Name="securityid" />
+            </Principal>
+            <Dependent Role="edsystemhist">
+              <PropertyRef Name="securityid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SYSTEMHIST_System_FK">
+          <End Role="edsystem" Type="Self.edsystem" Multiplicity="1" />
+          <End Role="edsystemhist" Type="Self.edsystemhist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="edsystem">
+              <PropertyRef Name="EDSystemId" />
+            </Principal>
+            <Dependent Role="edsystemhist">
+              <PropertyRef Name="edsystemid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="edbgsModelStoreContainer">
+          <EntitySet Name="economy" EntityType="Self.economy" Schema="mvcedbgs" store:Type="Tables" />
+          <EntitySet Name="edfaction" EntityType="Self.edfaction" Schema="mvcedbgs" store:Type="Tables" />
+          <EntitySet Name="edfactionhist" EntityType="Self.edfactionhist" Schema="mvcedbgs" store:Type="Tables" />
+          <EntitySet Name="edpendingstates" EntityType="Self.edpendingstates" Schema="mvcedbgs" store:Type="Tables" />
+          <EntitySet Name="edstation" EntityType="Self.edstation" Schema="mvcedbgs" store:Type="Tables" />
+          <EntitySet Name="edsystem" EntityType="Self.edsystem" Schema="mvcedbgs" store:Type="Tables" />
+          <EntitySet Name="edsystemhist" EntityType="Self.edsystemhist" Schema="mvcedbgs" store:Type="Tables" />
+          <EntitySet Name="govtype" EntityType="Self.govtype" Schema="mvcedbgs" store:Type="Tables" />
+          <EntitySet Name="power" EntityType="Self.power" Schema="mvcedbgs" store:Type="Tables" />
+          <EntitySet Name="powerstate" EntityType="Self.powerstate" Schema="mvcedbgs" store:Type="Tables" />
+          <EntitySet Name="reserve" EntityType="Self.reserve" Schema="mvcedbgs" store:Type="Tables" />
+          <EntitySet Name="security" EntityType="Self.security" Schema="mvcedbgs" store:Type="Tables" />
+          <EntitySet Name="state" EntityType="Self.state" Schema="mvcedbgs" store:Type="Tables" />
+          <EntitySet Name="superpower" EntityType="Self.superpower" Schema="mvcedbgs" store:Type="Tables" />
+          <AssociationSet Name="allegiance_FK" Association="Self.allegiance_FK">
+            <End Role="superpower" EntitySet="superpower" />
+            <End Role="edfaction" EntitySet="edfaction" />
+          </AssociationSet>
+          <AssociationSet Name="faction_fk" Association="Self.faction_fk">
+            <End Role="edfaction" EntitySet="edfaction" />
+            <End Role="edstation" EntitySet="edstation" />
+          </AssociationSet>
+          <AssociationSet Name="FactionHist_Faction_FK" Association="Self.FactionHist_Faction_FK">
+            <End Role="edfaction" EntitySet="edfaction" />
+            <End Role="edfactionhist" EntitySet="edfactionhist" />
+          </AssociationSet>
+          <AssociationSet Name="FactionHist_State_FK" Association="Self.FactionHist_State_FK">
+            <End Role="state" EntitySet="state" />
+            <End Role="edfactionhist" EntitySet="edfactionhist" />
+          </AssociationSet>
+          <AssociationSet Name="FactionHist_System_FK" Association="Self.FactionHist_System_FK">
+            <End Role="edsystem" EntitySet="edsystem" />
+            <End Role="edfactionhist" EntitySet="edfactionhist" />
+          </AssociationSet>
+          <AssociationSet Name="Government_FK" Association="Self.Government_FK">
+            <End Role="govtype" EntitySet="govtype" />
+            <End Role="edfaction" EntitySet="edfaction" />
+          </AssociationSet>
+          <AssociationSet Name="homesystem_FK" Association="Self.homesystem_FK">
+            <End Role="edsystem" EntitySet="edsystem" />
+            <End Role="edfaction" EntitySet="edfaction" />
+          </AssociationSet>
+          <AssociationSet Name="PendingState_FactionHist" Association="Self.PendingState_FactionHist">
+            <End Role="edfactionhist" EntitySet="edfactionhist" />
+            <End Role="edpendingstates" EntitySet="edpendingstates" />
+          </AssociationSet>
+          <AssociationSet Name="PendingState_State_FK" Association="Self.PendingState_State_FK">
+            <End Role="state" EntitySet="state" />
+            <End Role="edpendingstates" EntitySet="edpendingstates" />
+          </AssociationSet>
+          <AssociationSet Name="system_fk" Association="Self.system_fk">
+            <End Role="edsystem" EntitySet="edsystem" />
+            <End Role="edstation" EntitySet="edstation" />
+          </AssociationSet>
+          <AssociationSet Name="System_Reserves_FK" Association="Self.System_Reserves_FK">
+            <End Role="reserve" EntitySet="reserve" />
+            <End Role="edsystem" EntitySet="edsystem" />
+          </AssociationSet>
+          <AssociationSet Name="SYSTEMHIST_Economy_FK" Association="Self.SYSTEMHIST_Economy_FK">
+            <End Role="economy" EntitySet="economy" />
+            <End Role="edsystemhist" EntitySet="edsystemhist" />
+          </AssociationSet>
+          <AssociationSet Name="SYSTEMHIST_Faction_FK" Association="Self.SYSTEMHIST_Faction_FK">
+            <End Role="edfaction" EntitySet="edfaction" />
+            <End Role="edsystemhist" EntitySet="edsystemhist" />
+          </AssociationSet>
+          <AssociationSet Name="SYSTEMHIST_Power_FK" Association="Self.SYSTEMHIST_Power_FK">
+            <End Role="power" EntitySet="power" />
+            <End Role="edsystemhist" EntitySet="edsystemhist" />
+          </AssociationSet>
+          <AssociationSet Name="SYSTEMHIST_PowerState_FK" Association="Self.SYSTEMHIST_PowerState_FK">
+            <End Role="powerstate" EntitySet="powerstate" />
+            <End Role="edsystemhist" EntitySet="edsystemhist" />
+          </AssociationSet>
+          <AssociationSet Name="SYSTEMHIST_Security_FK" Association="Self.SYSTEMHIST_Security_FK">
+            <End Role="security" EntitySet="security" />
+            <End Role="edsystemhist" EntitySet="edsystemhist" />
+          </AssociationSet>
+          <AssociationSet Name="SYSTEMHIST_System_FK" Association="Self.SYSTEMHIST_System_FK">
+            <End Role="edsystem" EntitySet="edsystem" />
+            <End Role="edsystemhist" EntitySet="edsystemhist" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="edbgsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="edbgsEntities" annotation:LazyLoadingEnabled="false">
+          <EntitySet Name="economies" EntityType="edbgsModel.economy" />
+          <EntitySet Name="edfactions" EntityType="edbgsModel.edfaction" />
+          <EntitySet Name="edfactionhists" EntityType="edbgsModel.edfactionhist" />
+          <EntitySet Name="edpendingstates" EntityType="edbgsModel.edpendingstate" />
+          <EntitySet Name="edstations" EntityType="edbgsModel.edstation" />
+          <EntitySet Name="edsystems" EntityType="edbgsModel.edsystem" />
+          <EntitySet Name="edsystemhists" EntityType="edbgsModel.edsystemhist" />
+          <EntitySet Name="govtypes" EntityType="edbgsModel.govtype" />
+          <EntitySet Name="powers" EntityType="edbgsModel.power" />
+          <EntitySet Name="powerstates" EntityType="edbgsModel.powerstate" />
+          <EntitySet Name="reserves" EntityType="edbgsModel.reserve" />
+          <EntitySet Name="securities" EntityType="edbgsModel.security" />
+          <EntitySet Name="states" EntityType="edbgsModel.state" />
+          <EntitySet Name="superpowers" EntityType="edbgsModel.superpower" />
+          <AssociationSet Name="SYSTEMHIST_Economy_FK" Association="edbgsModel.SYSTEMHIST_Economy_FK">
+            <End Role="economy" EntitySet="economies" />
+            <End Role="edsystemhist" EntitySet="edsystemhists" />
+          </AssociationSet>
+          <AssociationSet Name="allegiance_FK" Association="edbgsModel.allegiance_FK">
+            <End Role="superpower" EntitySet="superpowers" />
+            <End Role="edfaction" EntitySet="edfactions" />
+          </AssociationSet>
+          <AssociationSet Name="faction_fk" Association="edbgsModel.faction_fk">
+            <End Role="edfaction" EntitySet="edfactions" />
+            <End Role="edstation" EntitySet="edstations" />
+          </AssociationSet>
+          <AssociationSet Name="FactionHist_Faction_FK" Association="edbgsModel.FactionHist_Faction_FK">
+            <End Role="edfaction" EntitySet="edfactions" />
+            <End Role="edfactionhist" EntitySet="edfactionhists" />
+          </AssociationSet>
+          <AssociationSet Name="Government_FK" Association="edbgsModel.Government_FK">
+            <End Role="govtype" EntitySet="govtypes" />
+            <End Role="edfaction" EntitySet="edfactions" />
+          </AssociationSet>
+          <AssociationSet Name="homesystem_FK" Association="edbgsModel.homesystem_FK">
+            <End Role="edsystem" EntitySet="edsystems" />
+            <End Role="edfaction" EntitySet="edfactions" />
+          </AssociationSet>
+          <AssociationSet Name="SYSTEMHIST_Faction_FK" Association="edbgsModel.SYSTEMHIST_Faction_FK">
+            <End Role="edfaction" EntitySet="edfactions" />
+            <End Role="edsystemhist" EntitySet="edsystemhists" />
+          </AssociationSet>
+          <AssociationSet Name="FactionHist_State_FK" Association="edbgsModel.FactionHist_State_FK">
+            <End Role="state" EntitySet="states" />
+            <End Role="edfactionhist" EntitySet="edfactionhists" />
+          </AssociationSet>
+          <AssociationSet Name="FactionHist_System_FK" Association="edbgsModel.FactionHist_System_FK">
+            <End Role="edsystem" EntitySet="edsystems" />
+            <End Role="edfactionhist" EntitySet="edfactionhists" />
+          </AssociationSet>
+          <AssociationSet Name="PendingState_FactionHist" Association="edbgsModel.PendingState_FactionHist">
+            <End Role="edfactionhist" EntitySet="edfactionhists" />
+            <End Role="edpendingstate" EntitySet="edpendingstates" />
+          </AssociationSet>
+          <AssociationSet Name="PendingState_State_FK" Association="edbgsModel.PendingState_State_FK">
+            <End Role="state" EntitySet="states" />
+            <End Role="edpendingstate" EntitySet="edpendingstates" />
+          </AssociationSet>
+          <AssociationSet Name="system_fk" Association="edbgsModel.system_fk">
+            <End Role="edsystem" EntitySet="edsystems" />
+            <End Role="edstation" EntitySet="edstations" />
+          </AssociationSet>
+          <AssociationSet Name="System_Reserves_FK" Association="edbgsModel.System_Reserves_FK">
+            <End Role="reserve" EntitySet="reserves" />
+            <End Role="edsystem" EntitySet="edsystems" />
+          </AssociationSet>
+          <AssociationSet Name="SYSTEMHIST_System_FK" Association="edbgsModel.SYSTEMHIST_System_FK">
+            <End Role="edsystem" EntitySet="edsystems" />
+            <End Role="edsystemhist" EntitySet="edsystemhists" />
+          </AssociationSet>
+          <AssociationSet Name="SYSTEMHIST_Power_FK" Association="edbgsModel.SYSTEMHIST_Power_FK">
+            <End Role="power" EntitySet="powers" />
+            <End Role="edsystemhist" EntitySet="edsystemhists" />
+          </AssociationSet>
+          <AssociationSet Name="SYSTEMHIST_PowerState_FK" Association="edbgsModel.SYSTEMHIST_PowerState_FK">
+            <End Role="powerstate" EntitySet="powerstates" />
+            <End Role="edsystemhist" EntitySet="edsystemhists" />
+          </AssociationSet>
+          <AssociationSet Name="SYSTEMHIST_Security_FK" Association="edbgsModel.SYSTEMHIST_Security_FK">
+            <End Role="security" EntitySet="securities" />
+            <End Role="edsystemhist" EntitySet="edsystemhists" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="economy">
+          <Key>
+            <PropertyRef Name="economyid" />
+          </Key>
+          <Property Name="economyid" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="game_id" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="EDDNId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="edsystemhists" Relationship="edbgsModel.SYSTEMHIST_Economy_FK" FromRole="economy" ToRole="edsystemhist" />
+        </EntityType>
+        <EntityType Name="edfaction">
+          <Key>
+            <PropertyRef Name="edfactionId" />
+          </Key>
+          <Property Name="edfactionId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="HomeSystem" Type="Int64" Nullable="false" />
+          <Property Name="IsPlayerFaction" Type="Boolean" Nullable="false" />
+          <Property Name="govtype" Type="Int32" Nullable="false" />
+          <Property Name="allegiance" Type="Int32" Nullable="false" />
+          <Property Name="EDDNId" Type="Int64" />
+          <NavigationProperty Name="superpower" Relationship="edbgsModel.allegiance_FK" FromRole="edfaction" ToRole="superpower" />
+          <NavigationProperty Name="edstations" Relationship="edbgsModel.faction_fk" FromRole="edfaction" ToRole="edstation" />
+          <NavigationProperty Name="edfactionhists" Relationship="edbgsModel.FactionHist_Faction_FK" FromRole="edfaction" ToRole="edfactionhist" />
+          <NavigationProperty Name="govtype1" Relationship="edbgsModel.Government_FK" FromRole="edfaction" ToRole="govtype" />
+          <NavigationProperty Name="edsystem" Relationship="edbgsModel.homesystem_FK" FromRole="edfaction" ToRole="edsystem" />
+          <NavigationProperty Name="edsystemhists" Relationship="edbgsModel.SYSTEMHIST_Faction_FK" FromRole="edfaction" ToRole="edsystemhist" />
+        </EntityType>
+        <EntityType Name="edfactionhist">
+          <Key>
+            <PropertyRef Name="edfactionhistId" />
+          </Key>
+          <Property Name="edfactionhistId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="edfactionid" Type="Int64" />
+          <Property Name="edsystemid" Type="Int64" />
+          <Property Name="timestamp" Type="DateTime" />
+          <Property Name="stateid" Type="Int32" />
+          <Property Name="influence" Type="Single" />
+          <NavigationProperty Name="edfaction" Relationship="edbgsModel.FactionHist_Faction_FK" FromRole="edfactionhist" ToRole="edfaction" />
+          <NavigationProperty Name="state" Relationship="edbgsModel.FactionHist_State_FK" FromRole="edfactionhist" ToRole="state" />
+          <NavigationProperty Name="edsystem" Relationship="edbgsModel.FactionHist_System_FK" FromRole="edfactionhist" ToRole="edsystem" />
+          <NavigationProperty Name="edpendingstates" Relationship="edbgsModel.PendingState_FactionHist" FromRole="edfactionhist" ToRole="edpendingstate" />
+        </EntityType>
+        <EntityType Name="edpendingstate">
+          <Key>
+            <PropertyRef Name="edpendingstatesid" />
+          </Key>
+          <Property Name="edpendingstatesid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="edfactionhistid" Type="Int64" />
+          <Property Name="trend" Type="Int32" />
+          <Property Name="stateid" Type="Int32" />
+          <Property Name="EDDNId" Type="Int32" />
+          <NavigationProperty Name="edfactionhist" Relationship="edbgsModel.PendingState_FactionHist" FromRole="edpendingstate" ToRole="edfactionhist" />
+          <NavigationProperty Name="state" Relationship="edbgsModel.PendingState_State_FK" FromRole="edpendingstate" ToRole="state" />
+        </EntityType>
+        <EntityType Name="edstation">
+          <Key>
+            <PropertyRef Name="edstationId" />
+          </Key>
+          <Property Name="edstationId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ControlingFaction" Type="Int64" Nullable="false" />
+          <Property Name="SystemId" Type="Int64" Nullable="false" />
+          <Property Name="EconomyId" Type="Int32" Nullable="false" />
+          <Property Name="StationTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Planetary" Type="Boolean" Nullable="false" />
+          <Property Name="EDDNId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="edfaction" Relationship="edbgsModel.faction_fk" FromRole="edstation" ToRole="edfaction" />
+          <NavigationProperty Name="edsystem" Relationship="edbgsModel.system_fk" FromRole="edstation" ToRole="edsystem" />
+        </EntityType>
+        <EntityType Name="edsystem">
+          <Key>
+            <PropertyRef Name="EDSystemId" />
+          </Key>
+          <Property Name="EDSystemId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EDDNId" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="X" Type="Single" Nullable="false" />
+          <Property Name="Y" Type="Single" Nullable="false" />
+          <Property Name="Z" Type="Single" Nullable="false" />
+          <Property Name="Premit" Type="Boolean" Nullable="false" />
+          <Property Name="Populated" Type="Boolean" Nullable="false" />
+          <Property Name="Reserves" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="edfactions" Relationship="edbgsModel.homesystem_FK" FromRole="edsystem" ToRole="edfaction" />
+          <NavigationProperty Name="edfactionhists" Relationship="edbgsModel.FactionHist_System_FK" FromRole="edsystem" ToRole="edfactionhist" />
+          <NavigationProperty Name="edstations" Relationship="edbgsModel.system_fk" FromRole="edsystem" ToRole="edstation" />
+          <NavigationProperty Name="reserve" Relationship="edbgsModel.System_Reserves_FK" FromRole="edsystem" ToRole="reserve" />
+          <NavigationProperty Name="edsystemhists" Relationship="edbgsModel.SYSTEMHIST_System_FK" FromRole="edsystem" ToRole="edsystemhist" />
+        </EntityType>
+        <EntityType Name="edsystemhist">
+          <Key>
+            <PropertyRef Name="edsystemhistid" />
+          </Key>
+          <Property Name="edsystemhistid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="edsystemid" Type="Int64" Nullable="false" />
+          <Property Name="timestamp" Type="DateTime" Nullable="false" />
+          <Property Name="controlingfactionid" Type="Int64" Nullable="false" />
+          <Property Name="economyid" Type="Int32" Nullable="false" />
+          <Property Name="powerid" Type="Int32" Nullable="false" />
+          <Property Name="powerstateid" Type="Int32" Nullable="false" />
+          <Property Name="securityid" Type="Int32" Nullable="false" />
+          <Property Name="EDDNId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="economy" Relationship="edbgsModel.SYSTEMHIST_Economy_FK" FromRole="edsystemhist" ToRole="economy" />
+          <NavigationProperty Name="edfaction" Relationship="edbgsModel.SYSTEMHIST_Faction_FK" FromRole="edsystemhist" ToRole="edfaction" />
+          <NavigationProperty Name="edsystem" Relationship="edbgsModel.SYSTEMHIST_System_FK" FromRole="edsystemhist" ToRole="edsystem" />
+          <NavigationProperty Name="power" Relationship="edbgsModel.SYSTEMHIST_Power_FK" FromRole="edsystemhist" ToRole="power" />
+          <NavigationProperty Name="powerstate" Relationship="edbgsModel.SYSTEMHIST_PowerState_FK" FromRole="edsystemhist" ToRole="powerstate" />
+          <NavigationProperty Name="security" Relationship="edbgsModel.SYSTEMHIST_Security_FK" FromRole="edsystemhist" ToRole="security" />
+        </EntityType>
+        <EntityType Name="govtype">
+          <Key>
+            <PropertyRef Name="govtypeid" />
+          </Key>
+          <Property Name="govtypeid" Type="Int32" Nullable="false" />
+          <Property Name="type" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="game_id" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="EDDNId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="edfactions" Relationship="edbgsModel.Government_FK" FromRole="govtype" ToRole="edfaction" />
+        </EntityType>
+        <EntityType Name="power">
+          <Key>
+            <PropertyRef Name="powerid" />
+          </Key>
+          <Property Name="powerid" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="game_id" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="edsystemhists" Relationship="edbgsModel.SYSTEMHIST_Power_FK" FromRole="power" ToRole="edsystemhist" />
+        </EntityType>
+        <EntityType Name="powerstate">
+          <Key>
+            <PropertyRef Name="powerstateid" />
+          </Key>
+          <Property Name="powerstateid" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="game_id" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="edsystemhists" Relationship="edbgsModel.SYSTEMHIST_PowerState_FK" FromRole="powerstate" ToRole="edsystemhist" />
+        </EntityType>
+        <EntityType Name="reserve">
+          <Key>
+            <PropertyRef Name="reserveid" />
+          </Key>
+          <Property Name="reserveid" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="game_id" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="edsystems" Relationship="edbgsModel.System_Reserves_FK" FromRole="reserve" ToRole="edsystem" />
+        </EntityType>
+        <EntityType Name="security">
+          <Key>
+            <PropertyRef Name="securityid" />
+          </Key>
+          <Property Name="securityid" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="game_id" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="edsystemhists" Relationship="edbgsModel.SYSTEMHIST_Security_FK" FromRole="security" ToRole="edsystemhist" />
+        </EntityType>
+        <EntityType Name="state">
+          <Key>
+            <PropertyRef Name="stateid" />
+          </Key>
+          <Property Name="stateid" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" Nullable="false" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="game_id" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="Faction" Type="Boolean" Nullable="false" />
+          <Property Name="System" Type="Boolean" Nullable="false" />
+          <Property Name="Power" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="edfactionhists" Relationship="edbgsModel.FactionHist_State_FK" FromRole="state" ToRole="edfactionhist" />
+          <NavigationProperty Name="edpendingstates" Relationship="edbgsModel.PendingState_State_FK" FromRole="state" ToRole="edpendingstate" />
+        </EntityType>
+        <EntityType Name="superpower">
+          <Key>
+            <PropertyRef Name="superpowerid" />
+          </Key>
+          <Property Name="superpowerid" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="game_id" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="edfactions" Relationship="edbgsModel.allegiance_FK" FromRole="superpower" ToRole="edfaction" />
+        </EntityType>
+        <Association Name="SYSTEMHIST_Economy_FK">
+          <End Type="edbgsModel.economy" Role="economy" Multiplicity="1" />
+          <End Type="edbgsModel.edsystemhist" Role="edsystemhist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="economy">
+              <PropertyRef Name="economyid" />
+            </Principal>
+            <Dependent Role="edsystemhist">
+              <PropertyRef Name="economyid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="allegiance_FK">
+          <End Type="edbgsModel.superpower" Role="superpower" Multiplicity="1" />
+          <End Type="edbgsModel.edfaction" Role="edfaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="superpower">
+              <PropertyRef Name="superpowerid" />
+            </Principal>
+            <Dependent Role="edfaction">
+              <PropertyRef Name="allegiance" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="faction_fk">
+          <End Type="edbgsModel.edfaction" Role="edfaction" Multiplicity="1" />
+          <End Type="edbgsModel.edstation" Role="edstation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="edfaction">
+              <PropertyRef Name="edfactionId" />
+            </Principal>
+            <Dependent Role="edstation">
+              <PropertyRef Name="ControlingFaction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FactionHist_Faction_FK">
+          <End Type="edbgsModel.edfaction" Role="edfaction" Multiplicity="0..1" />
+          <End Type="edbgsModel.edfactionhist" Role="edfactionhist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="edfaction">
+              <PropertyRef Name="edfactionId" />
+            </Principal>
+            <Dependent Role="edfactionhist">
+              <PropertyRef Name="edfactionid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Government_FK">
+          <End Type="edbgsModel.govtype" Role="govtype" Multiplicity="1" />
+          <End Type="edbgsModel.edfaction" Role="edfaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="govtype">
+              <PropertyRef Name="govtypeid" />
+            </Principal>
+            <Dependent Role="edfaction">
+              <PropertyRef Name="govtype" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="homesystem_FK">
+          <End Type="edbgsModel.edsystem" Role="edsystem" Multiplicity="1" />
+          <End Type="edbgsModel.edfaction" Role="edfaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="edsystem">
+              <PropertyRef Name="EDSystemId" />
+            </Principal>
+            <Dependent Role="edfaction">
+              <PropertyRef Name="HomeSystem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SYSTEMHIST_Faction_FK">
+          <End Type="edbgsModel.edfaction" Role="edfaction" Multiplicity="1" />
+          <End Type="edbgsModel.edsystemhist" Role="edsystemhist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="edfaction">
+              <PropertyRef Name="edfactionId" />
+            </Principal>
+            <Dependent Role="edsystemhist">
+              <PropertyRef Name="controlingfactionid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FactionHist_State_FK">
+          <End Type="edbgsModel.state" Role="state" Multiplicity="0..1" />
+          <End Type="edbgsModel.edfactionhist" Role="edfactionhist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="state">
+              <PropertyRef Name="stateid" />
+            </Principal>
+            <Dependent Role="edfactionhist">
+              <PropertyRef Name="stateid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FactionHist_System_FK">
+          <End Type="edbgsModel.edsystem" Role="edsystem" Multiplicity="0..1" />
+          <End Type="edbgsModel.edfactionhist" Role="edfactionhist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="edsystem">
+              <PropertyRef Name="EDSystemId" />
+            </Principal>
+            <Dependent Role="edfactionhist">
+              <PropertyRef Name="edsystemid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PendingState_FactionHist">
+          <End Type="edbgsModel.edfactionhist" Role="edfactionhist" Multiplicity="0..1" />
+          <End Type="edbgsModel.edpendingstate" Role="edpendingstate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="edfactionhist">
+              <PropertyRef Name="edfactionhistId" />
+            </Principal>
+            <Dependent Role="edpendingstate">
+              <PropertyRef Name="edfactionhistid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PendingState_State_FK">
+          <End Type="edbgsModel.state" Role="state" Multiplicity="0..1" />
+          <End Type="edbgsModel.edpendingstate" Role="edpendingstate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="state">
+              <PropertyRef Name="stateid" />
+            </Principal>
+            <Dependent Role="edpendingstate">
+              <PropertyRef Name="stateid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="system_fk">
+          <End Type="edbgsModel.edsystem" Role="edsystem" Multiplicity="1" />
+          <End Type="edbgsModel.edstation" Role="edstation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="edsystem">
+              <PropertyRef Name="EDSystemId" />
+            </Principal>
+            <Dependent Role="edstation">
+              <PropertyRef Name="SystemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="System_Reserves_FK">
+          <End Type="edbgsModel.reserve" Role="reserve" Multiplicity="1" />
+          <End Type="edbgsModel.edsystem" Role="edsystem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reserve">
+              <PropertyRef Name="reserveid" />
+            </Principal>
+            <Dependent Role="edsystem">
+              <PropertyRef Name="Reserves" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SYSTEMHIST_System_FK">
+          <End Type="edbgsModel.edsystem" Role="edsystem" Multiplicity="1" />
+          <End Type="edbgsModel.edsystemhist" Role="edsystemhist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="edsystem">
+              <PropertyRef Name="EDSystemId" />
+            </Principal>
+            <Dependent Role="edsystemhist">
+              <PropertyRef Name="edsystemid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SYSTEMHIST_Power_FK">
+          <End Type="edbgsModel.power" Role="power" Multiplicity="1" />
+          <End Type="edbgsModel.edsystemhist" Role="edsystemhist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="power">
+              <PropertyRef Name="powerid" />
+            </Principal>
+            <Dependent Role="edsystemhist">
+              <PropertyRef Name="powerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SYSTEMHIST_PowerState_FK">
+          <End Type="edbgsModel.powerstate" Role="powerstate" Multiplicity="1" />
+          <End Type="edbgsModel.edsystemhist" Role="edsystemhist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="powerstate">
+              <PropertyRef Name="powerstateid" />
+            </Principal>
+            <Dependent Role="edsystemhist">
+              <PropertyRef Name="powerstateid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SYSTEMHIST_Security_FK">
+          <End Type="edbgsModel.security" Role="security" Multiplicity="1" />
+          <End Type="edbgsModel.edsystemhist" Role="edsystemhist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="security">
+              <PropertyRef Name="securityid" />
+            </Principal>
+            <Dependent Role="edsystemhist">
+              <PropertyRef Name="securityid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="edbgsModelStoreContainer" CdmEntityContainer="edbgsEntities">
+          <EntitySetMapping Name="economies">
+            <EntityTypeMapping TypeName="edbgsModel.economy">
+              <MappingFragment StoreEntitySet="economy">
+                <ScalarProperty Name="EDDNId" ColumnName="EDDNId" />
+                <ScalarProperty Name="game_id" ColumnName="game_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="economyid" ColumnName="economyid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="edfactions">
+            <EntityTypeMapping TypeName="edbgsModel.edfaction">
+              <MappingFragment StoreEntitySet="edfaction">
+                <ScalarProperty Name="EDDNId" ColumnName="EDDNId" />
+                <ScalarProperty Name="allegiance" ColumnName="allegiance" />
+                <ScalarProperty Name="govtype" ColumnName="govtype" />
+                <ScalarProperty Name="IsPlayerFaction" ColumnName="IsPlayerFaction" />
+                <ScalarProperty Name="HomeSystem" ColumnName="HomeSystem" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="edfactionId" ColumnName="edfactionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="edfactionhists">
+            <EntityTypeMapping TypeName="edbgsModel.edfactionhist">
+              <MappingFragment StoreEntitySet="edfactionhist">
+                <ScalarProperty Name="influence" ColumnName="influence" />
+                <ScalarProperty Name="stateid" ColumnName="stateid" />
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+                <ScalarProperty Name="edsystemid" ColumnName="edsystemid" />
+                <ScalarProperty Name="edfactionid" ColumnName="edfactionid" />
+                <ScalarProperty Name="edfactionhistId" ColumnName="edfactionhistId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="edpendingstates">
+            <EntityTypeMapping TypeName="edbgsModel.edpendingstate">
+              <MappingFragment StoreEntitySet="edpendingstates">
+                <ScalarProperty Name="EDDNId" ColumnName="EDDNId" />
+                <ScalarProperty Name="stateid" ColumnName="stateid" />
+                <ScalarProperty Name="trend" ColumnName="trend" />
+                <ScalarProperty Name="edfactionhistid" ColumnName="edfactionhistid" />
+                <ScalarProperty Name="edpendingstatesid" ColumnName="edpendingstatesid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="edstations">
+            <EntityTypeMapping TypeName="edbgsModel.edstation">
+              <MappingFragment StoreEntitySet="edstation">
+                <ScalarProperty Name="EDDNId" ColumnName="EDDNId" />
+                <ScalarProperty Name="Planetary" ColumnName="Planetary" />
+                <ScalarProperty Name="StationTypeId" ColumnName="StationTypeId" />
+                <ScalarProperty Name="EconomyId" ColumnName="EconomyId" />
+                <ScalarProperty Name="SystemId" ColumnName="SystemId" />
+                <ScalarProperty Name="ControlingFaction" ColumnName="ControlingFaction" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="edstationId" ColumnName="edstationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="edsystems">
+            <EntityTypeMapping TypeName="edbgsModel.edsystem">
+              <MappingFragment StoreEntitySet="edsystem">
+                <ScalarProperty Name="Reserves" ColumnName="Reserves" />
+                <ScalarProperty Name="Populated" ColumnName="Populated" />
+                <ScalarProperty Name="Premit" ColumnName="Premit" />
+                <ScalarProperty Name="Z" ColumnName="Z" />
+                <ScalarProperty Name="Y" ColumnName="Y" />
+                <ScalarProperty Name="X" ColumnName="X" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EDDNId" ColumnName="EDDNId" />
+                <ScalarProperty Name="EDSystemId" ColumnName="EDSystemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="edsystemhists">
+            <EntityTypeMapping TypeName="edbgsModel.edsystemhist">
+              <MappingFragment StoreEntitySet="edsystemhist">
+                <ScalarProperty Name="EDDNId" ColumnName="EDDNId" />
+                <ScalarProperty Name="securityid" ColumnName="securityid" />
+                <ScalarProperty Name="powerstateid" ColumnName="powerstateid" />
+                <ScalarProperty Name="powerid" ColumnName="powerid" />
+                <ScalarProperty Name="economyid" ColumnName="economyid" />
+                <ScalarProperty Name="controlingfactionid" ColumnName="controlingfactionid" />
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+                <ScalarProperty Name="edsystemid" ColumnName="edsystemid" />
+                <ScalarProperty Name="edsystemhistid" ColumnName="edsystemhistid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="govtypes">
+            <EntityTypeMapping TypeName="edbgsModel.govtype">
+              <MappingFragment StoreEntitySet="govtype">
+                <ScalarProperty Name="EDDNId" ColumnName="EDDNId" />
+                <ScalarProperty Name="game_id" ColumnName="game_id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="govtypeid" ColumnName="govtypeid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="powers">
+            <EntityTypeMapping TypeName="edbgsModel.power">
+              <MappingFragment StoreEntitySet="power">
+                <ScalarProperty Name="game_id" ColumnName="game_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="powerid" ColumnName="powerid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="powerstates">
+            <EntityTypeMapping TypeName="edbgsModel.powerstate">
+              <MappingFragment StoreEntitySet="powerstate">
+                <ScalarProperty Name="game_id" ColumnName="game_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="powerstateid" ColumnName="powerstateid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="reserves">
+            <EntityTypeMapping TypeName="edbgsModel.reserve">
+              <MappingFragment StoreEntitySet="reserve">
+                <ScalarProperty Name="game_id" ColumnName="game_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="reserveid" ColumnName="reserveid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="securities">
+            <EntityTypeMapping TypeName="edbgsModel.security">
+              <MappingFragment StoreEntitySet="security">
+                <ScalarProperty Name="game_id" ColumnName="game_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="securityid" ColumnName="securityid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="states">
+            <EntityTypeMapping TypeName="edbgsModel.state">
+              <MappingFragment StoreEntitySet="state">
+                <ScalarProperty Name="Power" ColumnName="Power" />
+                <ScalarProperty Name="System" ColumnName="System" />
+                <ScalarProperty Name="Faction" ColumnName="Faction" />
+                <ScalarProperty Name="game_id" ColumnName="game_id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="stateid" ColumnName="stateid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="superpowers">
+            <EntityTypeMapping TypeName="edbgsModel.superpower">
+              <MappingFragment StoreEntitySet="superpower">
+                <ScalarProperty Name="game_id" ColumnName="game_id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="superpowerid" ColumnName="superpowerid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
